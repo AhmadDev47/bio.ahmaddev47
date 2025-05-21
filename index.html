@@ -24,13 +24,15 @@
     <div id="user-page">
 
         <video class="background" autoplay muted loop playsinline>
-            <source src="./hi/banner.mp4" type="video/mp4">
+            <source src="./hi/ezgif-1fd4a9bcf9b1c0.mp4" type="video/mp4">
         </video>
 
         <div class="main-container" id="mainDiv">
 
             <div class="profile-container">
-                <img class="pp" src="./hi/image.png" draggable="false">
+                <div class="avatar-frame">
+                    <img class="pp" id="user-avatar" src="" alt="Avatar">
+                  </div>                  
                 <p class="username breathing" data-tooltip="uid: 1">AhmadDev47</p>
 
                 <div class="badges-container">
@@ -70,10 +72,11 @@
                 <div class="pre-container">
                     <div class="pre">
                         <div class="cropped">
+                            
                             <img draggable="false" id="rpc">
                         </div>
                     </div>
-                </div>
+                </div>                                    
 
                 <div class="links-container" id="linksDiv">
                     <div class="logo instagram" id="ig" onclick="window.open('https://www.instagram.com/ahmad.65blnn', '_blank');" bis_skin_checked="1">
@@ -127,9 +130,16 @@
                     </div>
 
                 </div>
+                
                 <div class="linksline"></div>
-
+                <p id="track" style="color:#1DB954; font-weight:bold; font-family:monospace; margin-top:10px;">
+                    🎵 Loading Spotify...
+                </p>   
             </div>
+            <p id="activity" style="color: #ccc; font-size: 14px; text-align: center; margin-top: 10px;">
+                Checking game status...
+            </p>
+            
         </div>
         <audio id="backgroundsong" src="./hi/SpotiDownloader.com - So🤞 - Bonez MC.mp3" loop autoplay></audio>
 

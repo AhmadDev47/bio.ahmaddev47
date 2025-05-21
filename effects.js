@@ -5,7 +5,7 @@ function removeOverlay() {
 
     overlay.style.opacity = '0';
     userpage.style.display = 'flex';
-    audio.volume = 0.3;
+    audio.volume = 0.14;
     audio.play();
 
     setTimeout(function() { 
