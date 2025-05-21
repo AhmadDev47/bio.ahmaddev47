@@ -100,7 +100,7 @@ body {
     padding: 20px;
     border-radius: 25px;
     background-color: rgba(17, 17, 17, 0.65);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 195, 255, 0.541);
     backdrop-filter: blur(3px);
     overflow: visible;
     perspective: 800px; /* tilt.js */
@@ -572,4 +572,90 @@ body {
     line-height: 1.5;
 }
 
-/* fixing mobile rpc view */
+#track {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 14px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(29, 185, 84, 0.4); /* Spotify green glow */
+    max-width: 300px;
+    margin: 20px auto;
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+#track img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+#track a {
+    color: #1DB954;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#track span {
+    color: #ccc;
+    font-size: 13px;
+    display: block;
+    margin-top: 4px;
+}
+#activity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #00c0fa;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    margin-top: 12px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 8px rgba(0, 217, 255, 0.4);
+}
+
+#activity::before {
+    content: '®'; /* controller emoji or change to 🎲/🕹 */
+    font-size: 18px;
+}
+.avatar-frame {
+    position: relative;
+    width: 128px;
+    height: 128px;
+  }
+  
+  .avatar-frame .pp,
+  .avatar-frame .custom-decoration {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+  
+  .avatar-frame .custom-decoration {
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.85;
+    mix-blend-mode: lighten; /* OR: screen, overlay, soft-light */
+    animation: floatGlow 6s ease-in-out infinite;
+  }
+  
+  @keyframes floatGlow {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.05); opacity: 0.7; }
+  }
+  
