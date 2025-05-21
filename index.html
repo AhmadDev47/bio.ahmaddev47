@@ -10,15 +10,16 @@
     <link rel="stylesheet" href="public/users/css/cat.css">
     <link rel="icon" href="./hi/cursor.png" type="image/x-icon">
     <link rel="shortcut icon" href="./hi/cursor.png" type="image/x-icon">
+      <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+      <!-- Firebase SDKs -->
 </head>
-<script src="effects.js"></script>
-<script src="effects2.js"></script>
-<script src="tilt.js"></script>
-<script src="volume.js"></script>
+
 
 <body>
+
+
 
     <div id="overlay">
         <button class="overlaybtn" onclick="removeOverlay()">ᴄʟɪᴄᴋ ᴛᴏ ᴇɴᴛᴇʀ...</button>
@@ -141,9 +142,8 @@
             <p id="activity" style="color: #ccc; font-size: 14px; text-align: center; margin-top: 10px;">
                 Checking game status...
             </p>
-            <div id="view-count">
-                👁 <span id="views">...</span>
-              </div>
+     <!-- 👁 View Counter -->
+     <div id="view-count">👁 <span id="views">...</span></div>
         </div>
         
         <audio id="backgroundsong" src="./hi/SpotiDownloader.com - So🤞 - Bonez MC.mp3" loop autoplay></audio>
@@ -164,7 +164,11 @@
         
             <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
         </div>              
-        
+          <!-- Scripts (moved to bottom for proper load order) -->
+           <script src="effects.js"></script>
+           <script src="effects2.js"></script>
+           <script src="tilt.js"></script>
+           <script src="volume.js"></script>
 </body>
 
 </html>
