@@ -3,6 +3,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const imgElement = document.getElementById('rpc');
     imgElement.src = imgSrc;
 
+    document.addEventListener("DOMContentLoaded", () => {
+        // ✅ Your Firebase config
+        const firebaseConfig = {
+          databaseURL: "https://ahmadportfolio-438f2-default-rtdb.firebaseio.com/"
+        };
+      
+        // ✅ Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        const counterRef = db.ref("pageViews");
+      
+        // ✅ Increment and update view count
+        counterRef.transaction(current => {
+          return (current || 0) + 1;
+        });
+      
+        // ✅ Listen for live updates
+        counterRef.on("value", snapshot => {
+          const viewDisplay = document.getElementById("views");
+          if (viewDisplay) {
+            viewDisplay.textContent = snapshot.val();
+          }
+        });
+      });
+      
+
     const socket = new WebSocket("wss://api.lanyard.rest/socket");
     const userId = "1146773764705636362";
 
@@ -80,10 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (imgId.startsWith("mp:")) {
                         gameImageUrl = `https://media.discordapp.net/${imgId.replace("mp:", "")}`;
                     } else {
-                        gameImageUrl = `https://cdn.discordapp.com/app-assets/${appId}/${imgId}.gif`;
+                        gameImageUrl = `https://cdn.discordapp.com/app-assets/${appId}/${imgId}.png`;
                     }
                 } else {
-                    gameImageUrl = "./hi/image.png";
+                    gameImageUrl = "./fallback-game.png";
                 }
 
                 activityElement.innerHTML = `
