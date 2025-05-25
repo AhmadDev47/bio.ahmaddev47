@@ -50,7 +50,9 @@ typeWriter();
 
 document.addEventListener("DOMContentLoaded", function () {
 const elements = document.querySelectorAll('.typewriter');
-const texts = ["Full Stack Dev 🛠", "JS,HTML,CSS,C++,PY", "rate song 1/10"];
+const savedConfig = JSON.parse(localStorage.getItem("profileConfig"));
+const texts = savedConfig?.bio ? [savedConfig.bio] : [" Full Stack Dev 🛠", "JS,HTML,CSS,C++,PY"];
+
 const typingSpeed = 100;
 const pauseDuration = 1000;
 let currentIndex = 0;

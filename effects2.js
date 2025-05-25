@@ -1,54 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const imgSrc = "https://lanyard.cnrad.dev/api/1146773764705636362?bg=00000000&animated=true=true&showSpotify=true&showDisplayName=true&hideActivity=true";
+    const config = JSON.parse(localStorage.getItem("profileConfig")) || {};
+    const discordId = config.discordId || "1146773764705636362";
+    
+    const imgSrc = `https://lanyard.cnrad.dev/api/${discordId}?bg=00000000&animated=true=true&showSpotify=true&showDisplayName=true&hideActivity=true`;
     const imgElement = document.getElementById('rpc');
-    imgElement.src = imgSrc;
-
-    const gistId = "6fab00f43221e3bc77478bd1f3b63347";
-    const token = "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"; // Keep secret
+    if (imgElement) imgElement.src = imgSrc;
     
-    async function updateViews() {
-      const url = `https://api.github.com/gists/${gistId}`;
     
-      const res = await fetch(url, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-    
-      const data = await res.json();
-      const content = JSON.parse(data.files["views.json"].content);
-      const views = content.views + 1;
-    
-      // Update Gist with new view count
-      await fetch(url, {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          files: {
-            "views.json": {
-              content: JSON.stringify({ views })
-            }
-          }
-        })
-      });
-    
-      // Display it
-      const viewElement = document.getElementById("views");
-      if (viewElement) {
-        viewElement.textContent = views;
-      }
-    }
-    
-    updateViews().catch(console.error);
     
       
       
 
     const socket = new WebSocket("wss://api.lanyard.rest/socket");
-    const userId = "1146773764705636362";
+
+const userId = config.discordId || "1146773764705636362"; // fallback
+
 
     socket.onopen = () => {
         socket.send(JSON.stringify({

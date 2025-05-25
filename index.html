@@ -143,7 +143,7 @@
                 Checking game status...
             </p>
      <!-- 👁 View Counter -->
-     <div id="view-count">👁 <span id="views">...</span></div>
+     <div id="view-count">👁 <span id="views">323</span></div>
         </div>
         
         <audio id="backgroundsong" src="./hi/SpotiDownloader.com - So🤞 - Bonez MC.mp3" loop autoplay></audio>
@@ -169,6 +169,79 @@
            <script src="effects2.js"></script>
            <script src="tilt.js"></script>
            <script src="volume.js"></script>
+           <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              const config = JSON.parse(localStorage.getItem("profileConfig"));
+              if (!config) return;
+            
+              // Update username and bio
+              const usernameElem = document.querySelector(".username");
+              if (usernameElem) usernameElem.textContent = config.username || "AhmadDev47";
+            
+              const bioElem = document.querySelector(".bio");
+              if (bioElem) bioElem.textContent = config.bio || "";
+            
+              // Avatar
+              const avatar = document.getElementById("user-avatar");
+              if (avatar && config.avatarUrl) avatar.src = config.avatarUrl;
+            
+              // Background video
+              const videoSource = document.querySelector(".background source");
+              if (videoSource && config.bgVideo) {
+                videoSource.src = config.bgVideo;
+                videoSource.parentElement.load();
+              }
+            
+              // Music
+              const audio = document.getElementById("backgroundsong");
+              if (audio && config.musicUrl) {
+                audio.src = config.musicUrl;
+                audio.load();
+              }
+            
+              // Effect class
+              const mainDiv = document.getElementById("mainDiv");
+              if (mainDiv && config.effects && config.effects !== "none") {
+                mainDiv.classList.add(config.effects);
+              }
+            
+              // Tilt toggle
+              if (mainDiv && config.tilt === false) {
+                mainDiv.style.transform = "none";
+                mainDiv.onmousemove = null;
+              }
+            
+              // Social links
+              if (config.socials) {
+                if (config.socials.instagram) {
+                  const ig = document.getElementById("ig");
+                  if (ig) ig.onclick = () => window.open(config.socials.instagram, "_blank");
+                }
+                if (config.socials.tiktok) {
+                  const tt = document.getElementById("tt");
+                  if (tt) tt.onclick = () => window.open(config.socials.tiktok, "_blank");
+                }
+                if (config.socials.discord) {
+                  const dc = document.getElementById("btc");
+                  if (dc) dc.onclick = () => window.open(config.socials.discord, "_blank");
+                }
+              }
+            });
+            </script>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  const config = JSON.parse(localStorage.getItem("profileConfig")) || {};
+                  if (config.bgVideo) {
+                    const video = document.querySelector(".background");
+                    const source = video.querySelector("source");
+              
+                    // Update video source
+                    source.src = config.bgVideo;
+                    video.load(); // reload video element
+                  }
+                });
+              </script>
+              
 </body>
 
 </html>
