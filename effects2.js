@@ -1,26 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const config = JSON.parse(localStorage.getItem("profileConfig")) || {};
     const discordId = config.discordId || "1146773764705636362";
-    
-    const imgSrc = `https://lanyard.cnrad.dev/api/${discordId}?bg=00000000&animated=true=true&showSpotify=true&showDisplayName=true&hideActivity=true`;
+
+    const imgSrc = `https://lanyard.cnrad.dev/api/${discordId}?bg=00000000&animated=true&showSpotify=true&showDisplayName=true&hideActivity=true`;
     const imgElement = document.getElementById('rpc');
     if (imgElement) imgElement.src = imgSrc;
-    
-    
-    
-      
-      
 
     const socket = new WebSocket("wss://api.lanyard.rest/socket");
-
-const userId = config.discordId || "1146773764705636362"; // fallback
-
 
     socket.onopen = () => {
         socket.send(JSON.stringify({
             op: 2,
             d: {
-                subscribe_to_id: userId
+                subscribe_to_id: discordId
             }
         }));
     };
@@ -43,9 +35,12 @@ const userId = config.discordId || "1146773764705636362"; // fallback
             const decoration = user.avatar_decoration;
             const userId = user.id;
 
-            const avatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png?size=128`;
-            const decorationUrl = decoration 
-                ? `https://cdn.discordapp.com/avatar-decorations/${userId}/${decoration}.png` 
+            const avatarUrl = avatar.startsWith("a_")
+                ? `https://cdn.discordapp.com/avatars/${userId}/${avatar}.gif?size=128`
+                : `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png?size=128`;
+
+            const decorationUrl = decoration
+                ? `https://cdn.discordapp.com/avatar-decorations/${userId}/${decoration}.png`
                 : null;
 
             if (avatarImg) avatarImg.src = avatarUrl;
@@ -74,14 +69,11 @@ const userId = config.discordId || "1146773764705636362"; // fallback
                     </div>
                 `;
             } else {
-                trackElement.innerHTML = `<span style="opacity: 0.7;">🎧 Not playing anything right now</span>`;
+                trackElement.innerHTML = `<span style="opacity: 0.7;">🎗 Not playing anything right now</span>`;
             }
 
             const nonSpotifyActivity = activities.find(a => a.name !== "Spotify" && a.type === 0);
             if (nonSpotifyActivity) {
-                console.log("Game asset image:", nonSpotifyActivity.assets?.large_image);
-                console.log("App ID:", nonSpotifyActivity.application_id);
-
                 let gameImageUrl = null;
                 if (nonSpotifyActivity.assets?.large_image) {
                     const imgId = nonSpotifyActivity.assets.large_image;
@@ -94,8 +86,8 @@ const userId = config.discordId || "1146773764705636362"; // fallback
                     }
                 } else {
                     gameImageUrl = avatar.startsWith("a_")
-                ? `https://cdn.discordapp.com/avatars/${userId}/${avatar}.gif?size=128`
-                : `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png?size=128`;
+                    ? `https://cdn.discordapp.com/avatars/${userId}/${avatar}.gif?size=128`
+                    : `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png?size=128`;
                 }
 
                 activityElement.innerHTML = `
